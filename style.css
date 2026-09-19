@@ -1,0 +1,231 @@
+:root {
+  --bg-color: #0b0f19;
+  --card-bg: rgba(23, 31, 48, 0.65);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  
+  --btn-num-bg: rgba(255, 255, 255, 0.04);
+  --btn-num-hover: rgba(255, 255, 255, 0.08);
+  --btn-action-bg: rgba(255, 255, 255, 0.08);
+  --btn-action-hover: rgba(255, 255, 255, 0.14);
+  
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --accent-glow: rgba(168, 85, 247, 0.35);
+  --operator-color: #38bdf8;
+  --operator-bg: rgba(56, 189, 248, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background Glowing Blobs */
+.bg-glow {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.blob-1 {
+  top: -10%;
+  left: -10%;
+  background: #4f46e5;
+}
+
+.blob-2 {
+  bottom: -10%;
+  right: -10%;
+  background: #9333ea;
+}
+
+/* Glassmorphism Calculator Card */
+.calculator-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  background: var(--card-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header & Branding */
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--accent-gradient);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.brand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+/* Screen Display */
+.display-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 18px;
+  min-height: 100px;
+  word-break: break-all;
+}
+
+.history-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  min-height: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.main-text {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+  transition: all 0.15s ease;
+}
+
+/* Keypad Grid Layout */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Buttons Base Styling */
+.btn {
+  border: none;
+  outline: none;
+  height: 60px;
+  border-radius: 16px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--btn-num-bg);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: var(--btn-num-hover);
+  transform: translateY(-2px);
+}
+
+.btn:active,
+.btn.pressed {
+  transform: translateY(1px) scale(0.97);
+}
+
+/* Specific Button Styles */
+.btn-action {
+  background: var(--btn-action-bg);
+  color: var(--text-secondary);
+}
+
+.btn-action:hover {
+  background: var(--btn-action-hover);
+  color: var(--text-primary);
+}
+
+.btn-operator {
+  background: var(--operator-bg);
+  color: var(--operator-color);
+  font-weight: 600;
+}
+
+.btn-operator:hover {
+  background: rgba(56, 189, 248, 0.18);
+}
+
+.btn-equals {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.btn-equals:hover {
+  box-shadow: 0 6px 20px var(--accent-glow);
+  filter: brightness(1.1);
+}
+
+/* Responsive tweaks for smaller screens */
+@media (max-width: 400px) {
+  .calculator-card {
+    margin: 16px;
+    padding: 20px;
+  }
+
+  .btn {
+    height: 52px;
+    font-size: 1.1rem;
+  }
+
+  .main-text {
+    font-size: 2rem;
+  }
+}
